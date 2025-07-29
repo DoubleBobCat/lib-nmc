@@ -1,0 +1,20 @@
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -O2
+OPENCV_FLAGS = `pkg-config --cflags --libs opencv4`
+
+TARGET = radar_extractor
+SOURCE = radar_extractor.cpp
+
+all: $(TARGET)
+
+$(TARGET): $(SOURCE)
+	$(CXX) $(CXXFLAGS) $(SOURCE) -o $(TARGET) $(OPENCV_FLAGS)
+
+clean:
+	rm -f $(TARGET)
+
+install_deps:
+	sudo apt-get update
+	sudo apt-get install libopencv-dev pkg-config
+
+.PHONY: all clean install_deps
